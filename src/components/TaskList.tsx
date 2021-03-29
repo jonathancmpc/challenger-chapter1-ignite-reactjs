@@ -23,29 +23,40 @@ export function TaskList() {
         isComplete: false
       }
       setTasks([...tasks, newTask]);
+      setNewTaskTitle('');
     }
   }
 
   function handleToggleTaskCompletion(id: number) {
     // Altere entre `true` ou `false` o campo `isComplete` de uma task com dado ID
-    const newTasks = [...tasks]
+    /* const newTasks = [...tasks]
     for (let i = 0; i < newTasks.length; i++) {
       if(newTasks[i].id == id) {
         newTasks[i].isComplete = !newTasks[i].isComplete;
       }
     }
+    setTasks(newTasks); */
+
+    const newTasks = tasks.map(task => task.id === id ? {
+      ...task,
+      isComplete: !task.isComplete
+    } : task);
+
     setTasks(newTasks);
   }
 
   function handleRemoveTask(id: number) {
     // Remova uma task da listagem pelo ID
-    const newTasks = [...tasks]
+    /* const newTasks = [...tasks]
     for (let i = 0; i < newTasks.length; i++) {
       if(newTasks[i].id == id) {
         newTasks.splice(i, 1);
       }
     }
-    setTasks(newTasks);
+    setTasks(newTasks); */
+
+    const filteredTasks = tasks.filter(task => task.id !== id);
+    setTasks(filteredTasks);
   }
 
   return (
